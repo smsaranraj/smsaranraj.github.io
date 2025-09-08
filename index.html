@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-  /* Animate dotted lines */
+
   @keyframes dash {
     to {
       stroke-dashoffset: -20;
@@ -55,7 +55,6 @@
   const square = document.getElementById("square");
   const lines = document.querySelectorAll("line");
 
-  // Function to reset all lines
   function resetLines() {
     lines.forEach(line => {
       line.classList.remove("animated");
@@ -63,12 +62,10 @@
     });
   }
 
-  // Click on square → animate all lines
   square.addEventListener("click", () => {
     lines.forEach(line => line.classList.add("animated"));
   });
 
-  // Click on individual line → only that line animated
   lines.forEach(line => {
     line.addEventListener("click", (e) => {
       e.stopPropagation(); // Prevent triggering square click
