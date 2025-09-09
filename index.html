@@ -9,7 +9,7 @@
   }
 
   .animated {
-    stroke: red !important;
+
     stroke-dasharray: 5,5;
     stroke-dashoffset: 0;
     animation: dash 1s linear infinite;
@@ -33,12 +33,21 @@
 <script>
   // Define which lines belong to which box
   const connections = {
-    svg_1: ["svg_6", "svg_7","svg_8","svg_10"],
-    svg_2: ["svg_7"],
-    svg_3: ["svg_10"],
-    svg_4: ["svg_8"],
-    svg_5: ["svg_6"],
+    svg_2: ["svg_16", "svg_17", "svg_18", "svg_19", "svg_20"],
+    svg_3: ["svg_16"],
+    svg_4: ["svg_17"],
+    svg_5: ["svg_15"],
+    svg_6: ["svg_18"],
+    svg_7: ["svg_19"],
+    svg_8: ["svg_20"],
+    svg_9: ["svg_15"]
+
   };
+
+  function randomColor() 
+  {
+    return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+  }
 
   fetch("diagram.svg")
     .then(res => res.text())
@@ -65,7 +74,10 @@
           const connected = connections[rect.id] || [];
           connected.forEach(lineId => {
             const line = svg.getElementById(lineId);
-            if (line) line.classList.add("animated");
+            if (line) 
+            {
+              line.classList.add("animated");
+              line.setAttribute("stroke", randomColor());}
           });
         });
       });
@@ -77,6 +89,7 @@
           e.stopPropagation();
           resetPaths();
           path.classList.add("animated");
+          path.setAttribute("stroke", randomColor());
         });
       });
     })

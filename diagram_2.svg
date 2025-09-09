@@ -1,0 +1,14 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <g id="Layer_1">
+  <title>Layer 1</title>
+  <rect id="svg_1" height="170" width="127" y="211" x="244.5" stroke="#000" fill="#56ffff"/>
+  <rect id="svg_2" height="107" width="68" y="100" x="451.5" stroke="#000" fill="#aa56ff"/>
+  <rect id="svg_3" height="100" width="74" y="306" x="565.5" stroke="#000" fill="#ffd4aa"/>
+  <rect id="svg_4" height="68" width="44" y="467" x="348.5" stroke="#000" fill="#ff56aa"/>
+  <rect id="svg_5" height="100" width="79" y="279" x="64.5" stroke="#000" fill="#aaff56"/>
+  <path id="svg_6" d="m245.5,298l-103.5,1" opacity="NaN" stroke="#000" fill="none"/>
+  <path id="svg_7" d="m294.5,211l-0.5,-172l190,0l0,61" opacity="NaN" stroke="#000" fill="none"/>
+  <path id="svg_8" d="m371.5,312c0,0 68.06614,0 67.5,0c0.56614,0 0.5,-56 0,-57c0,0.99777 53.5,1 53,0c0.50934,0 0.5,251.16195 0,251c0,0.14388 -98.5,0 -99,0" opacity="NaN" stroke="#000" fill="none"/>
+  <path id="svg_10" d="m352.5,210l-0.5,-39l72,0l0,58l270,0l0,255l-85,0l0,-79" opacity="NaN" stroke="#000" fill="none"/>
+ </g>
+</svg>
