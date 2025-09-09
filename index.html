@@ -2,7 +2,6 @@
 <html>
 <head>
 <style>
-
   @keyframes dash {
     to {
       stroke-dashoffset: -20;
@@ -28,49 +27,34 @@
 </head>
 <body>
 
-<h2>Square with 6 Connected Lines</h2>
-
-<svg height="300" width="400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Square -->
-  <rect id="square" x="150" y="100" width="100" height="100" fill="none" stroke="black" stroke-width="3" class="clickable"/>
-
-  <!-- Lines connected to square -->
-  <line id="line1" class="clickable" x1="200" y1="100" x2="200" y2="50" stroke="green" stroke-width="3"/>
-  <line id="line2" class="clickable" x1="200" y1="100" x2="250" y2="50" stroke="green" stroke-width="3"/>
-  <line id="line3" class="clickable" x1="250" y1="150" x2="300" y2="150" stroke="green" stroke-width="3"/>
-  <line id="line4" class="clickable" x1="250" y1="200" x2="300" y2="250" stroke="green" stroke-width="3"/>
-  <line id="line5" class="clickable" x1="150" y1="200" x2="100" y2="250" stroke="green" stroke-width="3"/>
-  <line id="line6" class="clickable" x1="150" y1="150" x2="100" y2="150" stroke="green" stroke-width="3"/>
-
-  <!-- Numbers for lines -->
-  <text x="205" y="70">1</text>
-  <text x="260" y="60">2</text>
-  <text x="305" y="155">3</text>
-  <text x="305" y="255">4</text>
-  <text x="70" y="255">5</text>
-  <text x="70" y="155">6</text>
-</svg>
+<!-- Load external SVG -->
+<object id="diagram" type="image/svg+xml" data="svg.svg" width="1000" height="1000"></object>
 
 <script>
-  const square = document.getElementById("square");
-  const lines = document.querySelectorAll("line");
+  const obj = document.getElementById("diagram");
 
-  function resetLines() {
-    lines.forEach(line => {
-      line.classList.remove("animated");
-      line.setAttribute("stroke", "green");
+  obj.addEventListener("load", () => {
+    const svgDoc = obj.contentDocument; // Access inside SVG
+    const square = svgDoc.getElementById("rect");
+    const lines = svgDoc.querySelectorAll("path");
+
+    function resetLines() {
+      lines.forEach(line => {
+        line.classList.remove("animated");
+        line.setAttribute("stroke", "green");
+      });
+    }
+
+    square.addEventListener("click", () => {
+      lines.forEach(line => line.classList.add("animated"));
     });
-  }
 
-  square.addEventListener("click", () => {
-    lines.forEach(line => line.classList.add("animated"));
-  });
-
-  lines.forEach(line => {
-    line.addEventListener("click", (e) => {
-      e.stopPropagation(); // Prevent triggering square click
-      resetLines();
-      line.classList.add("animated");
+    lines.forEach(line => {
+      line.addEventListener("click", (e) => {
+        e.stopPropagation();
+        resetLines();
+        line.classList.add("animated");
+      });
     });
   });
 </script>
