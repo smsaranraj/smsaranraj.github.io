@@ -9,54 +9,78 @@
   }
 
   .animated {
-    stroke: red;
+    stroke: red !important;
     stroke-dasharray: 5,5;
     stroke-dashoffset: 0;
     animation: dash 1s linear infinite;
   }
 
-  .clickable {
+  rect.clickable {
     cursor: pointer;
   }
 
-  text {
-    font-size: 14px;
-    fill: black;
+  path.clickable {
+    cursor: pointer;
+    pointer-events: stroke;  /* click only on stroke */
+    stroke-width: 5;        /* bigger clickable area */
   }
 </style>
 </head>
 <body>
 
-<!-- Load external SVG -->
-<object id="diagram" type="image/svg+xml" data="svg.svg" width="1000" height="1000"></object>
+<div id="svg-container"></div>
 
 <script>
-  const obj = document.getElementById("diagram");
+  // Define which lines belong to which box
+  const connections = {
+    svg_1: ["svg_6", "svg_7","svg_8","svg_10"],
+    svg_2: ["svg_7"],
+    svg_3: ["svg_10"],
+    svg_4: ["svg_8"],
+    svg_5: ["svg_6"],
+  };
 
-  obj.addEventListener("load", () => {
-    const svgDoc = obj.contentDocument; // Access inside SVG
-    const square = svgDoc.getElementById("rect");
-    const lines = svgDoc.querySelectorAll("path");
+  fetch("diagram.svg")
+    .then(res => res.text())
+    .then(svgText => {
+      document.getElementById("svg-container").innerHTML = svgText;
 
-    function resetLines() {
-      lines.forEach(line => {
-        line.classList.remove("animated");
-        line.setAttribute("stroke", "green");
+      const svg = document.querySelector("#svg-container svg");
+      const rects = svg.querySelectorAll("rect");
+      const paths = svg.querySelectorAll("path");
+
+      function resetPaths() {
+        paths.forEach(p => {
+          p.classList.remove("animated");
+          p.setAttribute("stroke", "black");
+          p.setAttribute("stroke-width", "2");
+        });
+      }
+
+      // Rectangles: click -> animate only their connected paths
+      rects.forEach(rect => {
+        rect.classList.add("clickable");
+        rect.addEventListener("click", () => {
+          resetPaths();
+          const connected = connections[rect.id] || [];
+          connected.forEach(lineId => {
+            const line = svg.getElementById(lineId);
+            if (line) line.classList.add("animated");
+          });
+        });
       });
-    }
 
-    square.addEventListener("click", () => {
-      lines.forEach(line => line.classList.add("animated"));
-    });
-
-    lines.forEach(line => {
-      line.addEventListener("click", (e) => {
-        e.stopPropagation();
-        resetLines();
-        line.classList.add("animated");
+      // Paths: click -> animate ONLY that path
+      paths.forEach(path => {
+        path.classList.add("clickable");
+        path.addEventListener("click", (e) => {
+          e.stopPropagation();
+          resetPaths();
+          path.classList.add("animated");
+        });
       });
-    });
-  });
+    })
+    .catch(err => console.error("Error loading SVG:", err));
 </script>
 
 </body>
