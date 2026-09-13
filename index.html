@@ -1,100 +1,40 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<style>
-  @keyframes dash {
-    to {
-      stroke-dashoffset: -20;
-    }
-  }
-
-  .animated {
-
-    stroke-dasharray: 10,10;
-    stroke-dashoffset: 0;
-    animation: dash 1s linear infinite;
-  }
-
-  rect.clickable {
-    cursor: pointer;
-  }
-
-  path.clickable {
-    cursor: pointer;
-    pointer-events: stroke;  /* click only on stroke */
-    stroke-width: 4;        /* bigger clickable area */
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio of Saranraj Shanmugam, Unity AR/VR developer and 3D artist.">
+  <title>Saranraj Shanmugam | Unity AR/VR Developer</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+    :root{--ink:#17221f;--muted:#60706b;--paper:#f3f5ef;--panel:#e4ebe3;--lime:#c9f05c;--orange:#ff784f;--line:rgba(23,34,31,.16);--mono:'DM Mono',monospace;--sans:'Manrope',sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans)}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 48px));margin:0 auto}.eyebrow{color:var(--muted);font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+    header{padding:22px 0;border-bottom:1px solid var(--line)}nav{display:flex;justify-content:space-between;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.04em}.brand-mark{display:grid;place-items:center;width:34px;height:34px;background:var(--ink);color:var(--lime);font:500 13px var(--mono)}.nav-links{display:flex;gap:28px;color:var(--muted);font-size:13px;font-weight:700}.nav-links a:hover{color:var(--orange)}.nav-contact{padding:10px 15px;border:1px solid var(--ink);font-size:12px;font-weight:800}
+    .hero{position:relative;min-height:660px;display:grid;align-items:center;overflow:hidden;border-bottom:1px solid var(--line)}.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(310px,.75fr);gap:70px;align-items:center;padding:90px 0 110px}h1{max-width:760px;margin:18px 0 28px;font-size:clamp(48px,7vw,92px);line-height:.98;letter-spacing:-.08em}h1 em{color:var(--orange);font-style:normal}.intro{max-width:560px;margin:0;color:var(--muted);font-size:17px;line-height:1.75}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.button{display:inline-flex;align-items:center;gap:10px;padding:14px 18px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:800;transition:transform .2s,background .2s}.button:hover{background:var(--orange);transform:translateY(-3px)}.button.secondary{background:transparent;color:var(--ink);border:1px solid var(--ink)}.button.secondary:hover{background:var(--lime)}
+    .hero-orbit{position:relative;height:390px;background:var(--ink);color:var(--paper);padding:28px;overflow:hidden}.hero-orbit:before,.hero-orbit:after{content:'';position:absolute;border:1px solid rgba(201,240,92,.5);border-radius:50%}.hero-orbit:before{width:330px;height:330px;right:-100px;top:32px}.hero-orbit:after{width:210px;height:210px;right:-40px;top:92px}.orbit-label{position:absolute;left:28px;bottom:26px;max-width:180px;color:#b9c4bc;font:12px/1.6 var(--mono)}.orbit-dot{position:absolute;top:88px;right:103px;width:15px;height:15px;background:var(--orange);border-radius:50%;box-shadow:0 0 0 10px rgba(255,120,79,.12)}.orbit-number{position:absolute;top:22px;right:25px;color:var(--lime);font:12px var(--mono)}.hero-orbit strong{position:relative;z-index:1;display:block;max-width:200px;margin-top:90px;color:var(--lime);font-size:42px;line-height:1;letter-spacing:-.07em}
+    .ticker{background:var(--lime);border-bottom:1px solid var(--ink);overflow:hidden}.ticker-track{display:flex;justify-content:space-between;gap:35px;padding:13px 0;white-space:nowrap;font:500 11px var(--mono);text-transform:uppercase}.ticker-track span:before{content:'✦';margin-right:35px}
+    section{padding:105px 0;border-bottom:1px solid var(--line)}.section-head{display:grid;grid-template-columns:.5fr 1.5fr;gap:30px;margin-bottom:55px}h2{max-width:670px;margin:0;font-size:clamp(34px,5vw,62px);line-height:1.03;letter-spacing:-.07em}.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}.skill{min-height:180px;padding:22px 20px 24px 0;border-right:1px solid var(--line)}.skill:not(:first-child){padding-left:20px}.skill:last-child{border-right:0}.skill h3{margin:32px 0 10px;font-size:17px;letter-spacing:-.04em}.skill p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}.skill-num{color:var(--orange);font:12px var(--mono)}
+    .work-section{background:var(--panel)}.work-list{border-top:1px solid var(--line)}.work-item{display:grid;grid-template-columns:.35fr 1fr .75fr;gap:30px;padding:30px 0;border-bottom:1px solid var(--line)}.work-date{color:var(--muted);font:12px var(--mono)}.work-item h3{margin:0 0 9px;font-size:23px;letter-spacing:-.05em}.work-role{margin:0;color:var(--orange);font-size:12px;font-weight:800;text-transform:uppercase}.work-item p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.project{min-height:335px;display:flex;flex-direction:column;justify-content:space-between;padding:25px;background:var(--ink);color:var(--paper)}.project:nth-child(2){background:var(--orange);color:var(--ink)}.project:nth-child(3){background:var(--lime);color:var(--ink)}.project-tag{font:11px var(--mono);text-transform:uppercase}.project h3{max-width:240px;margin:50px 0 0;font-size:32px;line-height:1;letter-spacing:-.07em}.project p{margin:25px 0 0;font-size:13px;line-height:1.6}.project-arrow{align-self:flex-end;font-size:25px}
+    .education-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}.education-list{border-top:1px solid var(--line)}.education-row{display:grid;grid-template-columns:.3fr 1fr;gap:20px;padding:19px 0;border-bottom:1px solid var(--line)}.education-row span{color:var(--muted);font:11px var(--mono)}.education-row strong{font-size:14px}.education-row small{color:var(--muted);font-size:12px;font-weight:500}
+    .contact{background:var(--ink);color:var(--paper);border-bottom:0}.contact .eyebrow{color:var(--lime)}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end}.contact h2{color:var(--lime)}.contact-copy{max-width:360px;color:#b9c4bc;font-size:14px;line-height:1.7}.contact-links{display:grid;gap:13px}.contact-link{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid rgba(243,245,239,.25);font-size:14px}.contact-link span{color:var(--lime);font:11px var(--mono)}footer{padding:20px 0;background:var(--ink);color:#8e9b94;font:11px var(--mono)}footer .wrap{display:flex;justify-content:space-between;gap:20px}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}.hero-copy,.hero-orbit{animation:rise .8s ease both}.hero-orbit{animation-delay:.15s}
+    @media(max-width:800px){.hero-grid,.contact-grid,.education-grid{grid-template-columns:1fr;gap:45px}.hero{min-height:auto}.hero-grid{padding:70px 0 80px}.hero-orbit{height:300px}.hero-orbit strong{margin-top:50px}.section-head{grid-template-columns:1fr;gap:20px;margin-bottom:35px}.skills-grid,.project-grid{grid-template-columns:repeat(2,1fr)}.skill:nth-child(2){border-right:0}.work-item{grid-template-columns:1fr 1.8fr}.work-item p{grid-column:2}}
+    @media(max-width:560px){.wrap{width:min(100% - 32px,1180px)}.nav-links{display:none}.nav-contact{padding:9px 11px}h1{font-size:51px}section{padding:70px 0}.skills-grid,.project-grid{grid-template-columns:1fr}.skill,.skill:not(:first-child){padding:20px 0;border-right:0;border-bottom:1px solid var(--line)}.skill:last-child{border-bottom:0}.work-item{grid-template-columns:1fr;gap:12px}.work-item p{grid-column:auto}.project{min-height:270px}.contact-grid{gap:35px}footer .wrap{flex-direction:column;gap:8px}}
+  </style>
 </head>
 <body>
-
-<div id="svg-container"></div>
-
-<script>
-  // Define which lines belong to which box
-  const connections = {
-    svg_2: ["svg_16", "svg_17", "svg_18", "svg_19", "svg_20"],
-    svg_3: ["svg_16"],
-    svg_4: ["svg_17"],
-    svg_5: ["svg_15"],
-    svg_6: ["svg_18"],
-    svg_7: ["svg_19"],
-    svg_8: ["svg_20"],
-    svg_9: ["svg_15"]
-
-  };
-
-  function randomColor() 
-  {
-    return `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
-  }
-
-  fetch("diagram.svg")
-    .then(res => res.text())
-    .then(svgText => {
-      document.getElementById("svg-container").innerHTML = svgText;
-
-      const svg = document.querySelector("#svg-container svg");
-      const rects = svg.querySelectorAll("rect");
-      const paths = svg.querySelectorAll("path");
-
-      function resetPaths() {
-        paths.forEach(p => {
-          p.classList.remove("animated");
-          p.setAttribute("stroke", "black");
-          p.setAttribute("stroke-width", "2");
-        });
-      }
-
-      // Rectangles: click -> animate only their connected paths
-      rects.forEach(rect => {
-        rect.classList.add("clickable");
-        rect.addEventListener("click", () => {
-          resetPaths();
-          const connected = connections[rect.id] || [];
-          connected.forEach(lineId => {
-            const line = svg.getElementById(lineId);
-            if (line) 
-            {
-              line.classList.add("animated");
-              line.setAttribute("stroke", randomColor());}
-          });
-        });
-      });
-
-      // Paths: click -> animate ONLY that path
-      paths.forEach(path => {
-        path.classList.add("clickable");
-        path.addEventListener("click", (e) => {
-          e.stopPropagation();
-          resetPaths();
-          path.classList.add("animated");
-          path.setAttribute("stroke", randomColor());
-        });
-      });
-    })
-    .catch(err => console.error("Error loading SVG:", err));
-</script>
-<a href="quiz.html">Go to About Page</a>
+  <header><div class="wrap"><nav aria-label="Main navigation"><a class="brand" href="#top"><span class="brand-mark">SS</span><span>Saranraj Shanmugam</span></a><div class="nav-links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a></div><a class="nav-contact" href="mailto:smsaranraj@gmail.com">Let's talk ↗</a></nav></div></header>
+  <main id="top">
+    <section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow">01 / Unity developer + 3D artist</div><h1>Building worlds that feel <em>real.</em></h1><p class="intro">I am Saranraj, a Unity AR/VR developer and 3D artist based in India. I create immersive tools, training experiences, and interactive digital twins from concept to working prototype.</p><div class="hero-actions"><a class="button" href="#work">Explore my work <span>↓</span></a><a class="button secondary" href="mailto:smsaranraj@gmail.com">Email me <span>↗</span></a></div></div><div class="hero-orbit" aria-label="Saranraj's role summary"><span class="orbit-number">EST. 2012 — NOW</span><span class="orbit-dot"></span><strong>AR<br>VR<br>3D</strong><span class="orbit-label">From a sketch to a spatial experience. Design, code, model, animate.</span></div></div></section>
+    <div class="ticker" aria-hidden="true"><div class="wrap ticker-track"><span>Unity + C#</span><span>Spatial computing</span><span>Blender tools</span><span>Digital twins</span></div></div>
+    <section id="about"><div class="wrap"><div class="section-head"><div class="eyebrow">02 / What I do</div><h2>Curious by nature.<br>Precise by craft.</h2></div><div class="skills-grid"><article class="skill"><span class="skill-num">01</span><h3>Unity engineering</h3><p>Interactive applications, level design, lighting, particles, UI Toolkit, and clean C# systems.</p></article><article class="skill"><span class="skill-num">02</span><h3>AR / VR experiences</h3><p>Markerless AR, VR training, walkthroughs, and immersive workflows for real-world use cases.</p></article><article class="skill"><span class="skill-num">03</span><h3>3D production</h3><p>Realistic and stylized modeling, texturing, rigging, animation, and game-ready asset creation.</p></article><article class="skill"><span class="skill-num">04</span><h3>Pipeline tools</h3><p>Editor scripting and custom Blender tools that automate repetitive work and keep teams moving.</p></article></div></div></section>
+    <section class="work-section" id="experience"><div class="wrap"><div class="section-head"><div class="eyebrow">03 / Experience</div><h2>A decade of making<br>the invisible tangible.</h2></div><div class="work-list"><article class="work-item"><time class="work-date">DEC 2023 — NOW</time><div><h3>Volvo Group India</h3><p class="work-role">Experienced Spare Parts Engineer</p></div><p>Unity AR/VR development for aftermarket services, AR workflow automation through editor scripting, and custom Blender tools for animation pipelines.</p></article><article class="work-item"><time class="work-date">JUL 2019 — DEC 2023</time><div><h3>ASM Technologies</h3><p class="work-role">3D Modeler &amp; VR Developer</p></div><p>Unity C#, AR and VR development, Blender modeling and animation for interactive industrial experiences.</p></article><article class="work-item"><time class="work-date">SEP 2014 — JUN 2019</time><div><h3>Mobi2Fun</h3><p class="work-role">3D Artist</p></div><p>Hyper-casual game development with Unity and C#, plus modeling, texturing, rigging, and animation for game assets.</p></article><article class="work-item"><time class="work-date">MAY 2012 — APR 2014</time><div><h3>Gameshastra Solutions</h3><p class="work-role">3D Artist</p></div><p>High-poly real-scale objects, environment lighting and texturing, and isometric 2D and 3D game assets.</p></article></div></div></section>
+    <section id="work"><div class="wrap"><div class="section-head"><div class="eyebrow">04 / Selected work</div><h2>Turning complex ideas<br>into clear experiences.</h2></div><div class="project-grid"><article class="project"><div><span class="project-tag">Industrial AR</span><h3>Fixtures,<br>made interactive.</h3><p>Markerless AR experience for interacting with fixtures in a real-world environment.</p></div><span class="project-arrow">↗</span></article><article class="project"><div><span class="project-tag">Training VR</span><h3>Learn by<br>doing.</h3><p>Interactive assembly training built in Unity C# for SteamVR and HTC Vive.</p></div><span class="project-arrow">↗</span></article><article class="project"><div><span class="project-tag">Digital twin</span><h3>Step inside<br>the data.</h3><p>VR walkthrough for exploring and interacting with digital twin environments.</p></div><span class="project-arrow">↗</span></article></div></div></section>
+    <section><div class="wrap education-grid"><div><div class="eyebrow">05 / Education</div><h2>Always learning.<br>Always building.</h2></div><div class="education-list"><div class="education-row"><span>2012</span><strong>Diploma in Animation Engineering<br><small>Arena Multimedia, Anna Nagar, Chennai</small></strong></div><div class="education-row"><span>2009</span><strong>B.Sc. Communication &amp; Computer Science<br><small>SASTRA-SRC, Tamil Nadu</small></strong></div><div class="education-row"><span>2006</span><strong>HSC<br><small>Swami Dhayanandha Higher Secondary School</small></strong></div><div class="education-row"><span>2004</span><strong>SSLC<br><small>R.K.R Government Higher Secondary School</small></strong></div></div></div></section>
+    <section class="contact" id="contact"><div class="wrap contact-grid"><div><div class="eyebrow">06 / Start a conversation</div><h2>Have a world<br>to build?</h2><p class="contact-copy">I am open to thoughtful collaborations, immersive product work, and teams solving interesting problems in 3D.</p></div><div class="contact-links"><a class="contact-link" href="mailto:smsaranraj@gmail.com">smsaranraj@gmail.com <span>EMAIL ↗</span></a><a class="contact-link" href="tel:+918056410014">+91 80564 10014 <span>CALL ↗</span></a><a class="contact-link" href="#top">Back to top <span>↑</span></a></div></div></section>
+  </main>
+  <footer><div class="wrap"><span>© <span id="year"></span> SARANRAJ SHANMUGAM</span><span>UNITY / AR / VR / 3D</span></div></footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
